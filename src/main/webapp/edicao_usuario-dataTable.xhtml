@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Search User</title>
+</h:head>
+
+<h:body style="background-color: #fdedfc70; padding: 0 50px;">
+	<h:form id="form1" >
+
+
+		<p:panel header="Listagem de Usuários">
+
+			<div
+				style="display: flex; justify-content: end; align-items: center; margin-bottom: 25px;">
+
+				<p:link outcome="listagem_usuario" value="voltar"
+					style="margin-right: 15px;" />
+
+				<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out"
+					title="Sair"
+					style="border: 5px solid; 
+					border-radius: 50%; 
+					background-color: #7f8c8d;
+					width: 3rem;" />
+			</div>
+
+			<p:dataTable id="dt" value="#{usuarioBean.list}" var="u"
+				scrollRows="20" scrollable="true" virtualScroll="true"
+				scrollHeight="180" rows="40" update="form_edit"
+				
+				style="margin-bottom:0; text-align: center">
+
+				<p:column field="id" headerText="Id"  style="text-align: center"/>
+
+				<p:column field="nomeUsuario" headerText="Nome"
+					style="text-align: center" />
+
+				<p:column field="login" headerText="Login"
+					style="text-align: center" />
+
+				<p:column field="dataCadastro" headerText="Data de Cadastro"
+					style="text-align: center" />
+
+				<p:column headerText="Ações">
+
+					<p:column>
+						<p:commandButton icon="pi pi-pencil"
+							oncomplete="PF('editar').show()" title="Editar" update="form_edit"
+							style="border: 5px solid; 
+							border-radius: 50%; 
+							background-color: #8e44ad;
+							margin-right: 7px;
+							width: 3rem;
+							height: 3rem;">
+							<f:setPropertyActionListener value="#{u}"
+								target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+					</p:column>
+					
+				</p:column >
+			</p:dataTable >
+		</p:panel>
+	</h:form>
+
+	<p:panel header="Edição de Usuário" widgetVar="editar" style="margin-top: 15px;">
+		<h:form id="form_edit">
+			<h:panelGrid columns="3" style="min-width: 30%; padding: 10px 10px 10px 20px;">
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Id: " />
+					<p:inputText value="#{usuarioBean.usuario.id}" style="width:95%; margin: 10 0 40px 0;" disabled="true"/>
+				</div>
+				
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Nome: " />
+					<p:inputText value="#{usuarioBean.usuario.nomeUsuario}" style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Login: " />
+					<p:inputText value="#{usuarioBean.usuario.login}" style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Senha: " />
+					<p:inputText value="#{usuarioBean.usuario.senha}" style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Data do Cadastro: " />
+					<p:inputText value="#{usuarioBean.usuario.dataCadastro}" style="width:95%; margin: 10 0 40px 0;" disabled="true"/>
+				</div>
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+
+
+</h:body>
+</html>
