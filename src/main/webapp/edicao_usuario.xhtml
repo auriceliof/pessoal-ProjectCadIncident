@@ -38,15 +38,9 @@
 
 				<p:column field="id" headerText="Id" style="text-align: center" />
 
-				<p:column field="nomeUsuario" headerText="Nome"
-					style="text-align: center" />
-
 				<p:column field="login" headerText="Login"
 					style="text-align: center" />
-
-				<p:column field="dataCadastro" headerText="Data de Cadastro"
-					style="text-align: center" />
-
+				
 				<p:column headerText="Ações">
 
 					<p:column>
@@ -65,74 +59,69 @@
 					</p:column>
 
 				</p:column>
+				
 			</p:dataTable>
 		</p:panel>
 	</h:form>
 
 	<h:form id="form_find">
-	<p:panel header="Pesquisar">
-		<div class="ui-fluid formgrid grid">
-			<div class="field">
-				<p:outputLabel for="login" value="Basic" />
-				<p:selectOneMenu id="login">
-					<f:selectItems value="#{usuarioBean.list}" var="l"
-						itemLabel="#{l.login}" itemValue="#{l.login}" />
-				</p:selectOneMenu>
+		<p:panel header="Pesquisar" style="margin-top: 15px;">
+			<div class="ui-fluid formgrid grid" style="width: 20%;">
+				<div class="field">
+					<p:outputLabel for="login"/>
+					
+					<p:selectOneMenu id="login" value="#{usuarioBean.usuario.login}"  filter="true" filterMatchMode="startsWith" effect="fade">
+						<f:selectItem itemLabel="" itemValue=""/>
+												
+						<f:selectItems value="#{usuarioBean.list}" var="u"
+							itemLabel="#{u.login}" itemValue="#{u.login}" />
+						<p:ajax update="form_edit" />
+					</p:selectOneMenu>
+					
+				</div>
 			</div>
-			<div>
-				<p:commandButton icon="pi pi-pencil"
-					oncomplete="PF('editar').show()" title="Editar" update="form_edit"
-					style="border: 5px solid; 
-						border-radius: 50%; 
-						background-color: #8e44ad;
-						margin-right: 7px;
-						width: 3rem;
-						height: 3rem;">
-					<f:setPropertyActionListener value="#{l}"
-						target="#{usuarioBean.usuario}" />
-				</p:commandButton>
-			</div>
-		</div>
-	</p:panel>
-</h:form>
+		</p:panel>
+	</h:form>
 
-<h:form id="form_edit">
-	<p:panel header="Edição de Usuário" widgetVar="editar"
-		style="margin-top: 15px;">
-
-		<h:panelGrid columns="3"
-			style="min-width: 30%; padding: 10px 10px 10px 20px;">
-			<div style="margin-bottom: 50px;">
-				<p:outputLabel value="Id: " />
-				<p:inputText value="#{usuarioBean.usuario.id}"
-					style="width:95%; margin: 10 0 40px 0;" disabled="true" />
-			</div>
-
-			<div style="margin-bottom: 50px;">
-				<p:outputLabel value="Nome: " />
-				<p:inputText value="#{usuarioBean.usuario.nomeUsuario}"
-					style="width:95%; margin: 10 0 40px 0;" />
-			</div>
-
-			<div style="margin-bottom: 50px;">
-				<p:outputLabel value="Login: " />
-				<p:inputText value="#{usuarioBean.usuario.login}"
-					style="width:95%; margin: 10 0 40px 0;" />
-			</div>
-			<div style="margin-bottom: 50px;">
-				<p:outputLabel value="Senha: " />
-				<p:inputText value="#{usuarioBean.usuario.senha}"
-					style="width:95%; margin: 10 0 40px 0;" />
-			</div>
-			<div style="margin-bottom: 50px;">
-				<p:outputLabel value="Data do Cadastro: " />
-				<p:inputText value="#{usuarioBean.usuario.dataCadastro}"
-					style="width:95%; margin: 10 0 40px 0;" disabled="true" />
-			</div>
-		</h:panelGrid>
-
-	</p:panel>
-</h:form>
+	<h:form id="form_edit">
+		<p:panel header="Edição de Usuário" widgetVar="editar"
+			style="margin-top: 15px;">
+	
+			<h:panelGrid columns="3" 
+				style="min-width: 30%; padding: 10px 10px 10px 20px;">
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Id: " />
+					<p:inputText value="#{usuarioBean.usuario.id}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
+	
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Nome: " />
+					<p:inputText value="#{usuarioBean.usuario.nomeUsuario}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+	
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Login: " />
+					<p:inputText value="#{usuarioBean.usuario.login}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Senha: " />
+					<p:inputText value="#{usuarioBean.usuario.senha}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel value="Data do Cadastro: " />
+					<p:inputText value="#{usuarioBean.usuario.dataCadastro}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
+			</h:panelGrid>
+	
+		</p:panel>
+	</h:form>
 
 </h:body>
 </html>
