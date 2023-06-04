@@ -8,50 +8,53 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-	<title>View</title>
+	<title>Stat</title>
 </h:head>
 
 <h:body style="background-color: #fdedfcbd; padding: 0 50px;">
-	<h:form id="form1">
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form id="form_stat">
 
 		<p:panel header="Estatística">
-			
+
 			<p:link outcome="listagem_incidente" value="voltar"
 				style="display: flex;
 				justify-content: end; 
 				margin-bottom: 10px;" />
-				
-			<h:panelGrid columns="3" 
-				style="display: flex; 
-				justify-content: center; 
-				margin: 30px; 
-				background-color: #e6e6fa;
-				padding: 40px;
-				border-radius: 20px;" >
-			
-				<p:panel id="statTotal" header="Total de Incidentes" 
-					style="margin-right: 40px;
-					text-align: center">
-					<p:outputLabel widgetVar="statTotal" >
-						<p:outputLabel value="#{incidenteBean.contarIncidente}" 
-							style="color: #f178c1; 
-							font-size: 2em;
-							font-weight: bold"/>
-					</p:outputLabel>
-				</p:panel>
-								
-				<p:panel id="statUser" header="Total de Usuários"
-					style="text-align: center">
-					<p:outputLabel widgetVar="statUser" >
-						<p:outputLabel value="#{usuarioBean.contarUsuario}" 
-							style="color: #f178c1; 
-							font-size: 2em;
-							font-weight: bold;" />
-					</p:outputLabel>
-				</p:panel>
-	
-			</h:panelGrid>
+
+
+			<p:splitter style="height: 400px; background-color: #eed6fe94;" styleClass="mb-5" >
+				<p:splitterPanel style="display: flex; justify-content: center; align-items: center;" 
+									styleClass="flex align-items-center justify-content-center">
+					<div class="field col-12 md:col-4">
+						<h5 style="font-size: 1.5rem; color: green; text-align: center;">INCIDENTES</h5>
+						<p:knob value="#{incidenteBean.contarIncidente}"
+							colorTheme="hot-sneaks" backgroundColor="#6c757d">
+							<p:ajax listener="#{stat.onChange}" />
+						</p:knob>
+					</div>
+				</p:splitterPanel>
+				<p:splitterPanel style="display: flex; justify-content: center; align-items: center;"
+									styleClass="flex align-items-center justify-content-center">
+					<div class="field col-12 md:col-4">
+						<h5 style="font-size: 1.5rem; color: green; text-align: center;">USUÁRIOS</h5>
+						<div class="knob-container ui-corner-all">
+							<p:knob foregroundColor="#2196F3" backgroundColor="#6c757d"
+								value="#{usuarioBean.contarUsuario}">
+								<p:ajax listener="#{stat.onChange}" />
+							</p:knob>
+
+						</div>
+					</div>
+				</p:splitterPanel>
+			</p:splitter>
+
 		</p:panel>
+
 	</h:form>
 </h:body>
 

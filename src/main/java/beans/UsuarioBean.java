@@ -20,13 +20,12 @@ public class UsuarioBean implements Serializable{
 	
 	private Usuario usuario = new Usuario();
 	
-	private Date dataCadastro = new Date();
-	
 	private List<Usuario> list;
 	
 	private  String contarUsuario;
-		
-		
+	
+	private Date dataCadastro = new Date();	
+	
 	public String salvar() {
 			
 		try {			
@@ -43,9 +42,14 @@ public class UsuarioBean implements Serializable{
 		}
 	
 	public String editar() {
-		UsuarioDao.editar(usuario);
-		usuario = new Usuario();
-		return null;
+	    try {
+	        UsuarioDao.editar(usuario);
+	        MessageUtil.sucesso("Sucesso: ", "Usuário editado com sucesso!");
+	        usuario = new Usuario();
+	    } catch (Exception e) {
+	        MessageUtil.erro("Erro: ", "Erro ao editar usuário!");
+	    }
+	    return null;
 	}
 
 	public void deletar() {		
