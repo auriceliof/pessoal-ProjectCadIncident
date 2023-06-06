@@ -31,14 +31,14 @@
 		<p:splitterPanel
 			style="display: flex; justify-content: center; align-items: center;"
 			styleClass="flex align-items-center justify-content-center">
+			
 			<h:form id="form_find">
 				<p:panel header="Pesquisar" style="margin-top: 15px;">
 					<div class="col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:selectOneListbox id="find2"
-							value="#{usuarioBean.usuario.nomeUsuario}" filter="true"
-							filterMatchMode="contains">
+						<p:selectOneListbox id="find" value="#{usuarioBean.usuario.id}"
+						filter="true" filterMatchMode="contains">
 							<f:selectItems value="#{usuarioBean.list}" var="u"
-								itemLabel="#{u.login}" itemValue="#{u.nomeUsuario}" />
+								itemLabel="#{u.login}" itemValue="#{u.id}" />
 							<p:ajax update="form_edit" />
 						</p:selectOneListbox>
 					</div>
