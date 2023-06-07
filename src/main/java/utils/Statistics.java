@@ -7,7 +7,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @RequestScoped
-public class Stat implements Serializable {
+public class Statistics implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int value = 100;
 
