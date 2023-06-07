@@ -12,8 +12,8 @@
 </h:head>
 
 <h:body style="background-color: #fdedfc70; padding: 0 50px;">
-	<div
-		style="display: flex; justify-content: end; align-items: center; margin-bottom: 15px;">
+
+	<div style="display: flex; justify-content: end; align-items: center; margin-bottom: 15px;">
 
 		<p:link outcome="listagem_usuario" value="voltar"
 			style="margin-right: 15px;" />
@@ -26,69 +26,118 @@
 					width: 3rem;" />
 	</div>
 
-	<p:splitter style="height: 600px; background-color: #eed6fe94;"
-		styleClass="mb-5">
-		<p:splitterPanel
-			style="display: flex; justify-content: center; align-items: center;"
-			styleClass="flex align-items-center justify-content-center">
-			
-			<h:form id="form_find">
-				<p:panel header="Pesquisar" style="margin-top: 15px;">
-					<div class="col-12 md:col-6 lg:col-4 xl:col-3">
-						<p:selectOneListbox id="find" value="#{usuarioBean.usuario.id}"
-						filter="true" filterMatchMode="contains">
-							<f:selectItems value="#{usuarioBean.list}" var="u"
-								itemLabel="#{u.login}" itemValue="#{u.id}" />
-							<p:ajax update="form_edit" />
-						</p:selectOneListbox>
-					</div>
-				</p:panel>
-			</h:form>
-		</p:splitterPanel>
+	<p:panel header="Pesquisar Usuário">
+		<h:form id="form_find">
 
-		<p:splitterPanel
-			style="display: flex; justify-content: center; align-items: center;"
-			styleClass="flex align-items-center justify-content-center">
-			<h:form id="form_edit">
-				<p:panel header="Edição de Usuário" widgetVar="editar"
-					style="margin-top: 15px;">
-					<h:panelGrid columns="3"
-						style="min-width: 50%; padding: 10px 10px 10px 20px;">
-						<div style="margin-bottom: 50px;">
-							<p:outputLabel value="Id: " />
-							<p:inputText value="#{usuarioBean.usuario.id}"
-								style="width:95%; margin: 10 0 40px 0;" disabled="true" />
-						</div>
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
 
-						<div style="margin-bottom: 50px;">
-							<p:outputLabel id="nomeUsuario" value="Nome: " />
-							<p:inputText for="nomeUsuario"
-								value="#{usuarioBean.usuario.nomeUsuario}"
-								style="width:95%; margin: 10 0 40px 0;" />
-						</div>
 
-						<div style="margin-bottom: 50px;">
-							<p:outputLabel value="Login: " />
-							<p:inputText value="#{usuarioBean.usuario.login}"
-								style="width:95%; margin: 10 0 40px 0;" />
-						</div>
+			<div>
+				<p:commandButton icon="pi pi-search"
+					oncomplete="PF('editar').show()" title="Visualizar"
+					update="form_view"
+					style="border: 5px solid; 
+							border-radius: 50%;
+							background-color: #f39c12;
+							margin-right: 7px;
+							width: 3rem;
+							height: 3rem;">
+					<f:setPropertyActionListener value="#{u}"
+						target="#{usuarioBean.usuario}" />
+				</p:commandButton>
+			</div>
+		</h:form>
+	</p:panel>
 
-						<div style="margin-bottom: 50px;">
-							<p:outputLabel value="Senha: " />
-							<p:inputText value="#{usuarioBean.usuario.senha}"
-								style="width:95%; margin: 10 0 40px 0;" />
-						</div>
 
-						<div style="margin-bottom: 50px;">
-							<p:outputLabel value="Data do Cadastro: " />
-							<p:inputText value="#{usuarioBean.usuario.dataCadastro}"
-								style="width:95%; margin: 10 0 40px 0;" disabled="true" />
-						</div>
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
-		</p:splitterPanel>
-	</p:splitter>
+	<p:panel id="edit" header="Edição de Usuário" widgetVar="editar"
+		style="margin-top: 15px;">
+		<h:form id="form_edit">
+			<h:panelGrid columns="3"
+				style="min-width: 30%; padding: 10px 10px 10px 20px;">
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="id" value="Id: " />
+					<p:inputText id="id" value="#{usuarioBean.usuario.id}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
 
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="nomeUsuario" value="Nome: " />
+					<p:inputText id="nomeUsuario"
+						value="#{usuarioBean.usuario.nomeUsuario}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="login" value="Login: " />
+					<p:inputText id="login" value="#{usuarioBean.usuario.login}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="senha" value="Senha: " />
+					<p:inputText id="senha" value="#{usuarioBean.usuario.senha}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="dataCadastro" value="Data do Cadastro: " />
+					<p:inputText id="dataCadastro"
+						value="#{usuarioBean.usuario.dataCadastro}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
+			</h:panelGrid>
+			<p:commandButton value="Atualizar" action="#{usuarioBean.editar}"
+				oncomplete="PF('editar').hide()"
+				style="background-color:#8e44ad; margin-top: 40px;"
+				update="form_find" />
+		</h:form>
+	</p:panel>
+
+
+	<p:dialog header="" widgetVar="editar" modal="true"	closeOnEscape="true" position="top" height="auto">
+		<h:form id="form_view">
+
+			<p:panel id="visualizar" header="Listagem de Usuários">
+
+				<p:dataTable id="dt" value="#{usuarioBean.list}" var="u"
+					scrollRows="20" scrollable="true" virtualScroll="true"
+					scrollHeight="400" rows="40" update="form_edit"
+					style="margin-bottom:0; text-align: center">
+
+					<p:column field="id" headerText="Id" style="text-align: center" />
+
+					<p:column field="nomeUsuario" headerText="Nome"
+						style="text-align: center" />
+
+					<p:column field="login" headerText="Login"
+						style="text-align: center" />
+
+					<p:column field="dataCadastro" headerText="Data de Cadastro"
+						style="text-align: center" />
+
+					<p:column headerText="Ações" style="text-align: center">
+
+						<p:column>
+							<p:commandButton icon="pi pi-pencil"
+								oncomplete="PF('editar').hide()" title="Editar"
+								update="form_edit"
+								style="border: 5px solid; 
+							border-radius: 50%; 
+							background-color: #8e44ad;
+							margin-right: 7px;
+							width: 3rem;
+							height: 3rem;">
+								<f:setPropertyActionListener value="#{u}"
+									target="#{usuarioBean.usuario}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>
