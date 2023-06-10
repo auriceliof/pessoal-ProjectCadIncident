@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Search User</title>
+</h:head>
+
+<h:body style="background-color: #fdedfc70; padding: 0 50px;">
+
+	<div style="display: flex; justify-content: end; align-items: center; margin-bottom: 15px;">
+
+		<p:link outcome="listagem_usuario" value="voltar"
+			style="margin-right: 15px;" />
+
+		<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out"
+			title="Sair"
+			style="border: 5px solid; 
+					border-radius: 50%; 
+					background-color: #7f8c8d;
+					width: 3rem;" />
+	</div>
+
+	<p:panel header="Pesquisar Usuário">
+		<h:form id="form_find">
+
+			<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+			</p:messages>
+
+
+			<div>
+				<p:commandButton icon="pi pi-search"
+					oncomplete="PF('editar').show()" title="Visualizar"
+					update="form_view"
+					style="border: 5px solid; 
+							border-radius: 50%;
+							background-color: #f39c12;
+							margin-right: 7px;
+							width: 3rem;
+							height: 3rem;">
+					<f:setPropertyActionListener value="#{u}"
+						target="#{usuarioBean.usuario}" />
+				</p:commandButton>
+			</div>
+		</h:form>
+	</p:panel>
+
+
+	<p:panel id="edit" header="Edição de Usuário" widgetVar="editar"
+		style="margin-top: 15px;">
+		<h:form id="form_edit">
+			<h:panelGrid columns="3"
+				style="min-width: 30%; padding: 10px 10px 10px 20px;">
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="id" value="Id: " />
+					<p:inputText id="id" value="#{usuarioBean.usuario.id}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
+
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="nomeUsuario" value="Nome: " />
+					<p:inputText id="nomeUsuario"
+						value="#{usuarioBean.usuario.nomeUsuario}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="login" value="Login: " />
+					<p:inputText id="login" value="#{usuarioBean.usuario.login}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="senha" value="Senha: " />
+					<p:inputText id="senha" value="#{usuarioBean.usuario.senha}"
+						style="width:95%; margin: 10 0 40px 0;" />
+				</div>
+				<div style="margin-bottom: 50px;">
+					<p:outputLabel for="dataCadastro" value="Data do Cadastro: " />
+					<p:inputText id="dataCadastro"
+						value="#{usuarioBean.usuario.dataCadastro}"
+						style="width:95%; margin: 10 0 40px 0;" disabled="true" />
+				</div>
+			</h:panelGrid>
+			<p:commandButton value="Atualizar" action="#{usuarioBean.editar}"
+				oncomplete="PF('editar').hide()"
+				style="background-color:#8e44ad; margin-top: 40px;"
+				update="form_find" />
+		</h:form>
+	</p:panel>
+
+
+	<p:dialog header="" widgetVar="editar" modal="true"	closeOnEscape="true" position="top" height="auto">
+		<h:form id="form_view">
+
+			<p:panel id="visualizar" header="Listagem de Usuários">
+
+				<p:dataTable id="dt" value="#{usuarioBean.list}" var="u"
+					scrollRows="20" scrollable="true" virtualScroll="true"
+					scrollHeight="400" rows="40" update="form_edit"
+					style="margin-bottom:0; text-align: center">
+
+					<p:column field="id" headerText="Id" style="text-align: center" />
+
+					<p:column field="nomeUsuario" headerText="Nome"
+						style="text-align: center" />
+
+					<p:column field="login" headerText="Login"
+						style="text-align: center" />
+
+					<p:column field="dataCadastro" headerText="Data de Cadastro"
+						style="text-align: center" />
+
+					<p:column headerText="Ações" style="text-align: center">
+
+						<p:column>
+							<p:commandButton icon="pi pi-pencil"
+								oncomplete="PF('editar').hide()" title="Editar"
+								update="form_edit"
+								style="border: 5px solid; 
+							border-radius: 50%; 
+							background-color: #8e44ad;
+							margin-right: 7px;
+							width: 3rem;
+							height: 3rem;">
+								<f:setPropertyActionListener value="#{u}"
+									target="#{usuarioBean.usuario}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>
