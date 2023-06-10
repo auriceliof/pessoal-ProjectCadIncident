@@ -11,167 +11,208 @@
 	<title>Listining Users</title>
 </h:head>
 
-<h:body>	
-		
+<h:body>
+
 	<h:form id="form1">
-			
+
 		<p:panel header="Listagem de Usuários">
-		
-			<p:link outcome="listagem_incidente" value="voltar" 
-				style="display: flex;
-				justify-content: end; 
-				margin-bottom: 10px;"/>
-		
-			<div style="display: flex; justify-content: space-between; margin-bottom: 25px;">
-			
-				<p:linkButton action="Cadastro_usuario" outcome="cadastro_usuario" value="Novo" icon="pi pi-user" 
+
+			<div
+				style="display: flex; justify-content: space-between; margin-bottom: 25px;">
+
+				<p:linkButton action="Cadastro_usuario" outcome="cadastro_usuario"
+					value="Novo" icon="pi pi-user"
 					style="border: 5px solid; 
 					border-radius: 25px; 
-					width: 8rem;"/>
-				
-				<p:linkButton action="Edicao_usuario" outcome="edicao_usuario" value="Editar" icon="pi pi-user-edit" 
+					width: 8rem;" />
+
+				<p:linkButton action="Edicao_usuario" outcome="edicao_usuario"
+					value="Editar" icon="pi pi-user-edit"
 					style="border: 5px solid; 
 					background-color: #8e44ad;
 					border-radius: 25px; 
-					width: 8rem;"/>
-										
-				<p:commandButton value="Estatística" type="button" icon="pi pi-chart-line" onclick="PF('dlg1').show()"
-					style="border: 5px solid; 
-					border-radius: 25px; 
-					background-color: #d9b90c;
-					width: 8rem;"/>		
-					
-					
-				<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out" title="Sair" 
+					width: 8rem;" />
+
+				<p:commandButton title="Quantitativo" type="button"
+					icon="pi pi-chart-line" onclick="PF('dlg1').show()"
 					style="border: 5px solid; 
 					border-radius: 50%; 
-					background-color: #7f8c8d;
-					width: 3rem;"/>	
-										
+					background-color: #4d6900;
+					width: 3rem;" />
+
+
+				<div style="display: flex; justify-content: end; align-items: center;">
+
+					<p:link outcome="listagem_incidente" value="voltar"
+						style="margin-right: 15px;" />
+
+					<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out"
+						title="Sair"
+						style="border: 5px solid; 
+							border-radius: 50%; 
+							background-color: #7f8c8d;
+							width: 3rem;" />
+				</div>
+
 			</div>
-			
-			<p:dataTable id="dt" value="#{usuarioBean.list}" var="l" selection="#{usuarioBean.usuario}" selectionMode="single" rowKey="#{l.id}"
-			paginator="true" rows="5" paginatorPosition="bottom">	
-										
+
+			<p:dataTable id="dt" value="#{usuarioBean.list}" var="l"
+				selection="#{usuarioBean.usuario}" selectionMode="single"
+				rowKey="#{l.id}" paginator="true" rows="5"
+				paginatorPosition="bottom">
+
 				<p:column headerText="Id">
 					<p:column>
-						<p:outputLabel value="#{l.id}"/>							
-					</p:column>										
+						<p:outputLabel value="#{l.id}" />
+					</p:column>
 				</p:column>
 				<p:column headerText="Nome">
 					<p:column>
-						<p:outputLabel value="#{l.nomeUsuario}"/>							
-					</p:column>										
+						<p:outputLabel value="#{l.nomeUsuario}" />
+					</p:column>
 				</p:column>
 				<p:column headerText="Login">
 					<p:column>
-						<p:outputLabel value="#{l.login}"/>							
-					</p:column>										
+						<p:outputLabel value="#{l.login}" />
+					</p:column>
 				</p:column>
 				<p:column headerText="Data de Cadastro">
 					<p:column>
 						<p:outputLabel value="#{l.dataCadastro}">
-							<f:convertDateTime pattern="dd/MM/YYYY"/>
-						</p:outputLabel>					
-					</p:column>										
+							<f:convertDateTime pattern="dd/MM/YYYY" />
+						</p:outputLabel>
+					</p:column>
 				</p:column>
-				
-				<p:column headerText="Ações">
+
+				<p:column headerText="Ações" style="text-align: center">
 					<p:column>
-						<p:commandButton icon="pi pi-search" oncomplete="PF('visualizar').show()" title="Visualizar" update="form_view"
+						<p:commandButton icon="pi pi-search"
+							oncomplete="PF('visualizar').show()" title="Visualizar"
+							update="form_view"
 							style="border: 5px solid; 
 							border-radius: 50%;
 							background-color: #f39c12;
 							margin-right: 7px;
 							width: 3rem;
-							height: 3rem;">							
-							<f:setPropertyActionListener value="#{l}" target="#{usuarioBean.usuario}"/>								
-						</p:commandButton>															
-					</p:column>				
-					
+							height: 3rem;">
+							<f:setPropertyActionListener value="#{l}"
+								target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+					</p:column>
+
 					<p:column>
-						<p:commandButton icon="pi pi-pencil" oncomplete="PF('editar').show()" title="Editar" update="form_edit"
+						<p:commandButton icon="pi pi-pencil"
+							oncomplete="PF('editar').show()" title="Editar"
+							update="form_edit"
 							style="border: 5px solid; 
 							border-radius: 50%; 
 							background-color: #8e44ad;
 							margin-right: 7px;
 							width: 3rem;
-							height: 3rem;">	
-							<f:setPropertyActionListener value="#{l}" target="#{usuarioBean.usuario}"/>							
-						</p:commandButton>									
-					</p:column>	
-					
+							height: 3rem;">
+							<f:setPropertyActionListener value="#{l}"
+								target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+					</p:column>
+
 					<p:column>
-						<p:commandButton icon="pi pi-trash" oncomplete="PF('excluir').show()" title="Deletar" update="form_del"
+						<p:commandButton icon="pi pi-trash"
+							oncomplete="PF('excluir').show()" title="Deletar"
+							update="form_del"
 							style="border: 5px solid; 
 							border-radius: 50%; 
 							background-color: #e55039;
 							margin-right: 7px;
 							width: 3rem;
-							height: 3rem;">	
-							<f:setPropertyActionListener value="#{l}" target="#{usuarioBean.usuario}"/>							
-						</p:commandButton>														
-					</p:column>									
+							height: 3rem;">
+							<f:setPropertyActionListener value="#{l}"
+								target="#{usuarioBean.usuario}" />
+						</p:commandButton>
+					</p:column>
 				</p:column>
-							
-			</p:dataTable>
-			
-		</p:panel>	
-		
-	</h:form>
-	
-	<p:dialog header="Quantide de Usuário" widgetVar="dlg1" minHeight="40" width="350" 
-	showEffect="fade" modal="true" closeOnEscape="true">
- 		<p:outputLabel value="#{usuarioBean.contarUsuario}"/>
-	</p:dialog>
-		
-	<p:dialog header="Visualizar Usuario" widgetVar="visualizar" modal="true" closeOnEscape="true">
-		<h:form id="form_view" >
-			<h:panelGrid columns="2" cellpadding="5" id="visualizar" style="width: 500px;">
-				<p:outputLabel for="nome" value="Nome: "/>
-				<p:inputText id="nome" value="#{usuarioBean.usuario.nomeUsuario}" disabled="true" style="width: 300px;"/>
-				
-				<p:outputLabel for="login" value="Login: "/>
-				<p:inputText id="login" value="#{usuarioBean.usuario.login}" disabled="true" style="width: 300px;"/>
-				
-				<p:outputLabel for="senha" value="Senha: "/>
-				<p:inputText id="senha" value="#{usuarioBean.usuario.senha}" disabled="true" style="width: 300px;"/>				
-				
-				<p:outputLabel for="dataCadastro" value="Data de Cadastro: "/>
-				<p:datePicker id="dataCadastro" value="#{usuarioBean.usuario.dataCadastro}" disabled="true" style="width: 300px;" />		
-															
-			</h:panelGrid>
-		</h:form>
-	</p:dialog>			
-	
-	<p:dialog header="Editar Usuario" widgetVar="editar" modal="true" closeOnEscape="true">
-		<h:form id="form_edit">
-			<h:panelGrid columns="2" cellpadding="5" id="editar" style="width: 500px;">
-				<p:outputLabel for="nome" value="Nome:"/>
-				<p:inputText id="nome" value="#{usuarioBean.usuario.nomeUsuario}" required="true" requiredMessage="Campo Obrigatorio" style="width: 300px;"/>
-				
-				<p:outputLabel for="login" value="Login:"/>
-				<p:inputText id="login" value="#{usuarioBean.usuario.login}" required="true" requiredMessage="Campo Obrigatorio" style="width: 300px;"/>
-				
-				<p:outputLabel for="senha" value="Senha:"/>
-				<p:inputText id="senha" value="#{usuarioBean.usuario.senha}" required="true" requiredMessage="Campo Obrigatorio" style="width: 300px;"/>			
-			</h:panelGrid>
-				
-			<p:commandButton value="Atualizar" action="#{usuarioBean.editar}" oncomplete="PF('editar').hide()" style="background-color:#27ae60; margin-top: 40px;" update="form1"/>		
-		</h:form>
-	</p:dialog>
-	
-	<p:dialog header="Deseja relamente excluir o Usuário?" widgetVar="excluir" modal="true" closeOnEscape="true">
-		<h:form id="form_del">
-			<h:panelGrid columns="2" cellpadding="5" id="excluir" style="width: 400px;">
-				<p:inputText id="usuario" value="#{usuarioBean.usuario.nomeUsuario}" disabled="true" style="width: 300px;"/>
-			</h:panelGrid>
-				
-			<p:commandButton value="Sim" action="#{usuarioBean.deletar}" oncomplete="PF('excluir').hide()" style="background-color:#27ae60; margin-right: 10px; margin-top: 20px;" update="form1"/>	
-			<p:commandButton value="Não" oncomplete="PF('excluir').hide()" style="background-color:#e55039"/>			
-		</h:form>					
-	</p:dialog>	
 
-</h:body>	
+			</p:dataTable>
+
+		</p:panel>
+
+	</h:form>
+
+	<p:dialog header="Quantide de Usuário" widgetVar="dlg1" minHeight="40"
+		width="350" showEffect="fade" modal="true" closeOnEscape="true">
+		<p:outputLabel value="#{usuarioBean.contarUsuario}" />
+	</p:dialog>
+
+	<p:dialog header="Visualizar Usuario" widgetVar="visualizar"
+		modal="true" closeOnEscape="true">
+		<h:form id="form_view">
+			<h:panelGrid columns="2" cellpadding="5" id="visualizar"
+				style="width: 500px;">
+				<p:outputLabel for="nome" value="Nome: " />
+				<p:inputText id="nome" value="#{usuarioBean.usuario.nomeUsuario}"
+					disabled="true" style="width: 300px;" />
+
+				<p:outputLabel for="login" value="Login: " />
+				<p:inputText id="login" value="#{usuarioBean.usuario.login}"
+					disabled="true" style="width: 300px;" />
+
+				<p:outputLabel for="senha" value="Senha: " />
+				<p:inputText id="senha" value="#{usuarioBean.usuario.senha}"
+					disabled="true" style="width: 300px;" />
+
+				<p:outputLabel for="dataCadastro" value="Data de Cadastro: " />
+				<p:datePicker id="dataCadastro"
+					value="#{usuarioBean.usuario.dataCadastro}" disabled="true"
+					style="width: 300px;" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+	<p:dialog header="Editar Usuario" widgetVar="editar" modal="true"
+		closeOnEscape="true">
+		<h:form id="form_edit">
+			<h:panelGrid columns="2" cellpadding="5" id="editar"
+				style="width: 500px;">
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" value="#{usuarioBean.usuario.nomeUsuario}"
+					required="true" requiredMessage="Campo Obrigatorio"
+					style="width: 300px;" />
+
+				<p:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" value="#{usuarioBean.usuario.login}"
+					required="true" requiredMessage="Campo Obrigatorio"
+					style="width: 300px;" />
+
+				<p:outputLabel for="senha" value="Senha:" />
+				<p:inputText id="senha" value="#{usuarioBean.usuario.senha}"
+					required="true" requiredMessage="Campo Obrigatorio"
+					style="width: 300px;" />
+			</h:panelGrid>
+
+			<p:commandButton value="Atualizar" action="#{usuarioBean.editar}"
+				oncomplete="PF('editar').hide()"
+				style="background-color:#27ae60; margin-top: 40px;" update="form1" />
+		</h:form>
+	</p:dialog>
+
+	<p:dialog header="Deseja relamente excluir o Usuário?"
+		widgetVar="excluir" modal="true" closeOnEscape="true">
+		<h:form id="form_del">
+			<h:panelGrid columns="2" cellpadding="5" id="excluir"
+				style="width: 400px;">
+				<p:inputText id="usuario" value="#{usuarioBean.usuario.nomeUsuario}"
+					disabled="true" style="width: 300px;" />
+			</h:panelGrid>
+
+			<p:commandButton value="Sim" action="#{usuarioBean.deletar}"
+				oncomplete="PF('excluir').hide()"
+				style="background-color:#27ae60; margin-right: 10px; margin-top: 20px;"
+				update="form1" />
+			<p:commandButton value="Não" oncomplete="PF('excluir').hide()"
+				style="background-color:#e55039" />
+		</h:form>
+	</p:dialog>
+
+</h:body>
 
 </html>

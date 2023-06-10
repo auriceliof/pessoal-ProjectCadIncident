@@ -19,36 +19,40 @@
 		
 			
 			
-			<div style="display: flex; justify-content: space-around; margin-bottom: 25px;">
+			<div style="display: flex; justify-content: space-between; margin-bottom: 25px;">
 				
-				<p:linkButton action="Cadastro_incidente" outcome="cadastro_incidente" value="Cadastrar" icon="pi pi-book" 
+				<p:linkButton title="Cadastrar incidentes" action="Cadastro_incidente" outcome="cadastro_incidente" value="Cadastrar" icon="pi pi-book" 
 					style="border: 5px solid; 
 					border-radius: 25px; 
 					background-color: #f78fb3;
 					width: 8rem;"/>
 				
-				<p:linkButton action="Listagem_usuario" outcome="listagem_usuario" value="Usuários" icon="pi pi-users" 
+				<p:linkButton title="Listar usuarios" action="Listagem_usuario" outcome="listagem_usuario" value="Usuários" icon="pi pi-users" 
 					style="border: 5px solid; 
 					border-radius: 25px; 
 					width: 8rem;"/>		
 				
-				<p:linkButton outcome="estatistica" value="Estatística" icon="pi pi-chart-line"
+				<p:linkButton title="Estatistica" outcome="estatistica" value="Estatística" icon="pi pi-chart-line"
 					style="border: 5px solid; 
 					border-radius: 25px; 
 					background-color: #d9b90c;
 					width: 8rem;"/>	
 											
-				<p:commandButton title="EstatÃ­stica" type="button" icon="pi pi-chart-line" onclick="PF('dlg1').show()"
+				<p:commandButton title="Quantitativo" type="button" icon="pi pi-chart-line" onclick="PF('dlg1').show()"
 					style="border: 5px solid; 
 					border-radius: 50%; 
-					background-color: #d9b90c;
+					background-color: #4d6900;
 					width: 3rem;"/>	
 					
-				<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out" title="Sair" 
-					style="border: 5px solid; 
-					border-radius: 50%; 
-					background-color: #7f8c8d;
-					width: 3rem;"/>	
+				<div style="display: flex; justify-content: end; align-items: center;">
+									
+					<p:linkButton action="Sair" outcome="index" icon="pi pi-sign-out"
+						title="Sair"
+						style="border: 5px solid; 
+							border-radius: 50%; 
+							background-color: #7f8c8d;
+							width: 3rem;" />
+				</div>
 															
 			</div>
 			
@@ -83,7 +87,7 @@
 					</p:column>										
 				</p:column>
 								
-				<p:column headerText="Ações">
+				<p:column headerText="Ações" style="text-align: center">
 					<p:column>
 						<p:commandButton icon="pi pi-search" oncomplete="PF('visualizar').show()" title="Visualizar" update="form_view"
 							style="border: 5px solid; 

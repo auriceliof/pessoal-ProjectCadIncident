@@ -9,6 +9,7 @@
 
 <h:head>
 	<title>Search User</title>
+
 </h:head>
 
 <h:body style="background-color: #fdedfc70; padding: 0 50px;">
@@ -52,8 +53,8 @@
 	</p:panel>
 
 
-	<p:panel id="edit" header="Edição de Usuário" widgetVar="editar"
-		style="margin-top: 15px;">
+	<p:panel id="panel_edit" header="Edição de Usuário" widgetVar="edit" 
+		style="margin-top: 15px;" >
 		<h:form id="form_edit">
 			<h:panelGrid columns="3"
 				style="min-width: 30%; padding: 10px 10px 10px 20px;">
@@ -95,10 +96,11 @@
 	</p:panel>
 
 
-	<p:dialog header="" widgetVar="editar" modal="true"	closeOnEscape="true" position="top" height="auto">
+	<p:dialog header="" widgetVar="editar" modal="true"
+		closeOnEscape="true" position="top" height="auto">
 		<h:form id="form_view">
 
-			<p:panel id="visualizar" header="Listagem de Usuários">
+			<p:panel header="Listagem de Usuários">
 
 				<p:dataTable id="dt" value="#{usuarioBean.list}" var="u"
 					scrollRows="20" scrollable="true" virtualScroll="true"
@@ -119,24 +121,23 @@
 					<p:column headerText="Ações" style="text-align: center">
 
 						<p:column>
-							<p:commandButton icon="pi pi-pencil"
+							<p:commandButton id="btn-edit" icon="pi pi-pencil"
 								oncomplete="PF('editar').hide()" title="Editar"
 								update="form_edit"
 								style="border: 5px solid; 
-							border-radius: 50%; 
-							background-color: #8e44ad;
-							margin-right: 7px;
-							width: 3rem;
-							height: 3rem;">
+										border-radius: 50%; 
+										background-color: #8e44ad;
+										margin-right: 7px;
+										width: 3rem;
+										height: 3rem;">
 								<f:setPropertyActionListener value="#{u}"
-									target="#{usuarioBean.usuario}" />
+									target="#{usuarioBean.usuario}"/>
+						
 							</p:commandButton>
 						</p:column>
-
 					</p:column>
 				</p:dataTable>
 			</p:panel>
-
 		</h:form>
 	</p:dialog>
 </h:body>
