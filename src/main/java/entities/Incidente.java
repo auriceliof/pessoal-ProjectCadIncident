@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -92,5 +93,22 @@ public class Incidente implements Serializable {
 
 	public void setAgressor(Agressor agressor) {
 		this.agressor = agressor;
-	}	
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Incidente other = (Incidente) obj;
+		return id == other.id;
+	}
 }
